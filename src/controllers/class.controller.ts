@@ -1,12 +1,9 @@
-import { AppDataSource } from "../configs/dataSource";
-import { Class } from "../models/Class";
-
-const classRepo = AppDataSource.getRepository(Class);
+import { ClassService } from "../services/class.service";
 
 export class ClassController {
     static async getAllClass(req, res) {
         try {
-            const classes = await classRepo.find();
+            const classes = await ClassService.querytAllClass();
 
             if (classes) {
 
