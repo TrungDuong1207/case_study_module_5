@@ -26,8 +26,11 @@ export class Students {
     @Column({ type: "enum", enum: ['male', 'female'] })
     gender: GenderType;
 
-    @ManyToOne(() => Class, classT => classT.students)
-    classT: Class;
+    @Column({type: "varchar"})
+    image: string;
+
+    @ManyToOne(() => Class, studyClass => studyClass.students)
+    studyClass: Class;
 
     @OneToMany(() => Marks, (mark) => mark.student)
     marks: Marks[];

@@ -15,10 +15,10 @@ export class Class {
   @Column({ type: "varchar", length: 30 })
   className: string;
 
-  @OneToMany(() => TeacherDetails, (teacherDetail) => teacherDetail.classT)
+  @OneToMany(() => TeacherDetails, (teacherDetail) => teacherDetail.studyClass)
   teacherDetails: TeacherDetails[];
 
-  @OneToMany(() => Students, (student) => student.classT)
+  @OneToMany(() => Students, (student) => student.studyClass)
   students: Students[];
 }
 

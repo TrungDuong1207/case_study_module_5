@@ -1,8 +1,8 @@
-
+import { classRoutes } from "./class.route";
 function route(app) {
 
-    // app.use("/class", classRoutes);
-    // app.use("/teachers", teacherRoutes);
+    app.use("/class", classRoutes);
+    
 }
 
 export default route;

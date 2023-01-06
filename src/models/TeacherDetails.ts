@@ -12,6 +12,6 @@ export class TeacherDetails {
     @ManyToOne(() => Teachers, (teacher) => teacher.teacherDetails)
     teacher: Teachers;
 
-    @ManyToOne(() => Class, (classT) => classT.teacherDetails)
-    classT: Class;
+    @ManyToOne(() => Class, (studyClass) => studyClass.teacherDetails)
+    studyClass: Class;
 }

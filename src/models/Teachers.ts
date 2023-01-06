@@ -21,7 +21,10 @@ export class Teachers {
     gender: GenderType;
 
     @Column()
-    phone:number
+    phone:number;
+
+    @Column({type: "varchar"})
+    image: string;
 
     @OneToMany(() => TeacherDetails, (teacherDetail) => teacherDetail.teacher)
     teacherDetails: TeacherDetails[];
