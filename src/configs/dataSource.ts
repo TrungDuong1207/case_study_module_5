@@ -10,6 +10,6 @@ export const AppDataSource = new DataSource({
     database: "case_study_md5",
     synchronize: true,
     logging: false,
-    entities: ["dist/src/models/*.js"]
-   
+    entities: ["dist/src/models/*.js"] 
 })
+

@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from 'body-parser';
 import { AppDataSource } from "./src/configs/dataSource";
 import route from "./src/routes/index.route";
-const PORT = 3000;
+const PORT = 8000;
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
