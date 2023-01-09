@@ -38,8 +38,19 @@ export class MarkController {
     }
 
     static async deleteMark(req, res) {
+        try {
+            await MarkService.deleteOneMark(req, res);
+            res.status(204).json();
+        } catch (err) {
+            res.status(500).json({ message: err.mesage })
 
+        }
     }
+
+    static async updateMark(req, res) {
+        
+    }
+
 
 
 }

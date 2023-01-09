@@ -9,6 +9,6 @@ studentRoutes.post("/", StudentController.addStudent);
 studentRoutes.delete("/:id", StudentController.deleteStudent);
 studentRoutes.put("/:id", StudentController.updateStudent);
 
-studentRoutes.get("/marks/:id", MarkController.getMark);
-studentRoutes.post("/marks/:id", MarkController.addMark);
-studentRoutes.delete("/:id", MarkController.deleteMark);
+studentRoutes.get("/marks/:idStudent", MarkController.getMark);
+studentRoutes.post("/marks/:idStudent", MarkController.addMark);
+studentRoutes.delete("/marks/:idMark", MarkController.deleteMark);

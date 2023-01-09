@@ -20,10 +20,13 @@ export class Marks {
     @Column({ type: "enum", enum: ['semester 1', 'semester 2'] })
     semester: SemesterType;
 
+    @Column({type: "year", default: new Date().getFullYear() })
+    year: number;
+
     @ManyToOne (() => Subjects, subject => subject.marks)
     subject: Subjects;
 
     @ManyToOne (() => Students, student => student.marks)
-    student: Subjects;
+    student: Subjects; 
 
 }
