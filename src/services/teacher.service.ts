@@ -10,6 +10,14 @@ export class TeacherService {
         let teacher = await teacherRepo.findOneBy({id: id});
         return teacher;
     }
+
+    static async findTeacherByPhone(req, res) {
+        let phone = req.body.phone;
+        let teacher = await teacherRepo.findOneBy({phone: phone});
+        return teacher;
+    }
+
+
     static async addOneTeacher (req, res){
         let teacher = await teacherRepo.create(req.body);
         console.log(teacher);
