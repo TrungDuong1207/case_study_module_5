@@ -10,3 +10,4 @@ export const markRepo = AppDataSource.getRepository(Marks);
 export const accountRepo = AppDataSource.getRepository(Accounts);
 export const teacherRepo = AppDataSource.getRepository(Teachers);
 
+

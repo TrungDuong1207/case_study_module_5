@@ -1,7 +1,7 @@
 
 import { studentRepo } from "../models/repository/repository";
 
-export class StudentService {
+export class studentService {
     static async queryAllStudents (req, res){
         return await studentRepo.find();
     }
