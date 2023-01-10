@@ -1,9 +1,9 @@
-import { StudentService } from "../services/student.service";
+import { studentService } from "../services/student.service";
 
 export class StudentController {
     static async getAllStudents(req, res) {
         try {
-            const students = await StudentService.queryAllStudents(req, res);
+            const students = await studentService.queryAllStudents(req, res);
 
             if (students) {
 
@@ -20,7 +20,7 @@ export class StudentController {
 
     static async getStudent(req, res) {
         try {
-            const student = await StudentService.getStudent(req, res);
+            const student = await studentService.getStudent(req, res);
             if (student) {
                 res.status(200).json({ message: "Sucess", student: student });
 
@@ -37,7 +37,7 @@ export class StudentController {
 
     static async addStudent(req, res) {
         try {
-            await StudentService.addOneStudent(req, res);
+            await studentService.addOneStudent(req, res);
             res.status(201).json({ message: "add student complete" });
 
         } catch (err) {
@@ -48,12 +48,12 @@ export class StudentController {
 
     static async deleteStudent(req, res) {
         try {
-            let studentDelete = await StudentService.findStudentById(req, res);
+            let studentDelete = await studentService.findStudentById(req, res);
 
             if (!studentDelete) {
                 res.status(404).json({ message: "the student doesn't exist" })
             } else {
-                await StudentService.deleteOneStudent(req, res);
+                await studentService.deleteOneStudent(req, res);
                 res.status(204).json();
             }
         } catch (err) {
@@ -65,12 +65,12 @@ export class StudentController {
 
     static async updateStudent(req, res) {
         try {
-            let studentEdit = await StudentService.findStudentById(req, res);
+            let studentEdit = await studentService.findStudentById(req, res);
 
             if (!studentEdit) {
                 res.status(404).json({ message: "the student doesn't exist" })
             } else {
-                await StudentService.editStudent(req, res);
+                await studentService.editStudent(req, res);
                 res.status(200).json({ message: "update class complete" });
             }
         } catch (err) {
