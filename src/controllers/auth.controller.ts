@@ -2,7 +2,7 @@ import { AuthService } from "../services/auth.service";
 export class AuthController {
 //     static async login(req, res) {
 //         try {
-//             const teacher = await 
+//             const teacher = await
 //             if (user) {
 //                 const comparePass = await bcrypt.compare(req.body.password, user.password);
 //                 if (!comparePass) {
