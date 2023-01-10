@@ -1,6 +1,5 @@
 import { markRepo, studentRepo } from "../models/repository/repository";
 
-
 export class MarkService {
     static async queryMark (req, res){
         const id = req.params.idStudent;        
@@ -28,7 +27,9 @@ export class MarkService {
     }
 
     static async editMark(req, res){
-        
+        const id = req.params.idMark;
+        let mark = req.body;
+        await markRepo.update(id, mark);
     }
     
     
