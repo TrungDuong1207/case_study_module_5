@@ -13,7 +13,7 @@ export class StudentController {
 
         } catch (err) {
 
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }
@@ -30,18 +30,19 @@ export class StudentController {
 
         } catch (err) {
 
-            res.status(500).json({ message: err.mesage });
+            res.status(500).json({ message: err.message });
 
         }
     }
 
     static async addStudent(req, res) {
         try {
+            
             await studentService.addOneStudent(req, res);
-            res.status(201).json({ message: "add student complete" });
-
+            res.status(204).json()
+           
         } catch (err) {
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }
@@ -54,11 +55,11 @@ export class StudentController {
                 res.status(404).json({ message: "the student doesn't exist" })
             } else {
                 await studentService.deleteOneStudent(req, res);
-                res.status(204).json();
+                res.status(204).json({ message: "add student complete" });
             }
         } catch (err) {
 
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }
@@ -75,7 +76,7 @@ export class StudentController {
             }
         } catch (err) {
 
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }

@@ -1,5 +1,6 @@
 
 import { studentRepo } from "../models/repository/repository";
+const firebase = require('../configs/firebase');
 
 export class studentService {
     static async queryAllStudents (req, res){
@@ -22,8 +23,32 @@ export class studentService {
         
     }
 
-    static async addOneStudent (req, res){    
-        let student = await studentRepo.create(req.body);
+    static async addOneStudent (req, res){
+        if(!req.file) {
+            return res.status(400).send("Error: No files found")
+        } 
+        console.log(req.file);
+        
+        const blob = firebase.bucket.file("student-upload/"+req.file.originalname);
+       
+        const blobWriter = blob.createWriteStream({
+            metadata: {
+                contentType: req.file.mimetype
+            }
+        })
+        
+        blobWriter.on('error', (err) => {
+            console.log(err)
+        })
+        
+        blobWriter.on('finish', () => {
+            console.log("add student finish");
+            
+        })
+    
+        blobWriter.end(req.file.buffer);
+          
+        let student = await studentRepo.create({...req.body, image: req.file.originalname});
         console.log(student);
         await studentRepo.save(student);
     }

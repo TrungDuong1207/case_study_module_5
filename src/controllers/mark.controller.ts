@@ -13,7 +13,7 @@ export class MarkController {
 
         } catch (err) {
 
-            res.status(500).json({ message: err.mesage });
+            res.status(500).json({ message: err.message });
 
         }
     }
@@ -32,7 +32,7 @@ export class MarkController {
             res.status(201).json({ message: "add mark complete" });
 
         } catch (err) {
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }
@@ -42,7 +42,7 @@ export class MarkController {
             await MarkService.deleteOneMark(req, res);
             res.status(204).json();
         } catch (err) {
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
 
         }
     }
@@ -53,7 +53,7 @@ export class MarkController {
             res.status(200).json({ message: "update complete" });
         }catch(err) {
 
-        res.status(500).json({ message: err.mesage })
+        res.status(500).json({ message: err.message })
 
     }
 }

@@ -1,4 +1,4 @@
-import {studentRepo, teacherRepo} from "../models/repository/repository";
+import { teacherRepo} from "../models/repository/repository";
 
 export class TeacherService {
     static async queryAllTeacher(req, res) {

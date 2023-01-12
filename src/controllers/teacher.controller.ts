@@ -1,5 +1,3 @@
-import {studentService} from "../services/student.service";
-import {Teachers} from "../models/Teachers";
 import {TeacherService} from "../services/teacher.service";
 
 export class TeacherController {
@@ -7,24 +5,24 @@ export class TeacherController {
     static async getAllteacher(req, res) {
         try {
             const teachers = await TeacherService.queryAllTeacher(req, res);
-            if (Teachers) {
+            if (teachers) {
                 res.status(200).json({message: "Sucess", teacher: teachers})
 
             }
         } catch (err) {
 
-            res.status(500).json({message: err.mesage})
+            res.status(500).json({message: err.message})
         }
     }
 
     static async getTeacher(req, res) {
         try {
             const teachers = await TeacherService.findTeacherById(req, res);
-            if (Teachers) {
+            if (teachers) {
                 res.status(200).json({message: "Sucess"})
             }
         } catch (err) {
-            res.status(500).json({message: err.mesage})
+            res.status(500).json({message: err.message})
         }
     }
 
@@ -33,7 +31,7 @@ export class TeacherController {
              await TeacherService.addOneTeacher(req, res);
              res.status(200).json({message: "Sucess"})
         } catch (err) {
-            res.status(200).json({message: err.message})
+            res.status(500).json({message: err.message})
         }
     }
 
@@ -42,7 +40,7 @@ export class TeacherController {
             await TeacherService.deleteOneTeacher(req, res);
             res.status(200).json({message: "Sucess"})
         } catch (err) {
-            res.status(200).json({message: err.message})
+            res.status(500).json({message: err.message})
         }
     }
 
@@ -57,7 +55,7 @@ export class TeacherController {
                 res.status(200).json({ message: "update class complete" });
             }
         } catch (err) {
-            res.status(500).json({ message: err.mesage })
+            res.status(500).json({ message: err.message })
         }
     }
 
