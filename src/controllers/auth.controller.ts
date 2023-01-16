@@ -6,7 +6,6 @@ export class AuthController {
         try {
             const user = await AuthService.getUser(req, res);
             
-            
             if (user) {
                 const comparePass = await bcrypt.compare(req.body.password, user.password);                
                 if (!comparePass) {
@@ -29,6 +28,7 @@ export class AuthController {
                 res.cookie('token', token, options);
 
                 res.status(200).json({token: token});
+
             } else {
                 res.status(401).json({message: "user dosen't exist"})
             }

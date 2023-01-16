@@ -22,7 +22,7 @@ export class Teachers {
     gender: GenderType;
 
     @Column()
-    phone:number;
+    phone:string;
 
     @Column({type: "varchar"})
     image: string;

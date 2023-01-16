@@ -1,15 +1,16 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import { AppDataSource } from "./src/configs/dataSource";
+import cookieParser from 'cookie-parser';
 import route from "./src/routes/index.route";
 import dotenv from "dotenv";
 const PORT = 8000;
 dotenv.config();
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-
+app.use(cookieParser());
 AppDataSource
   .initialize()
   .then(() => {
@@ -18,6 +19,7 @@ AppDataSource
   .catch((err) => {
     console.log("Error during Data Source initialization:", err)
   })
+
 
 route(app);
 

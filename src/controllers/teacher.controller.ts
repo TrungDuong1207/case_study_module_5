@@ -59,5 +59,18 @@ export class TeacherController {
         }
     }
 
+    static async searchTeacher(req, res){
+        try {
+            let teachers = await TeacherService.searchTeacher(req, res)
+            if (!teachers) {
+                res.status(404).json({ message: "the teacher doesn't exist" })
+            } else {
+                res.status(200).json({ teachers: teachers});
+            }
+        } catch (err) {
+            res.status(500).json({ message: err.message })
+        }
+    }
+
 
 }

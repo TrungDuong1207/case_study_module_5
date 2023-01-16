@@ -1,9 +1,9 @@
 import {Router} from "express";
 import {subjectController} from "../controllers/subject.controller";
-export  const subjectRouter = Router();
+export  const subjectRoutes = Router();
 
-subjectRouter.get('/',subjectController.getAllSubject);
-subjectRouter.get('/:id',subjectController.getSubject);
-subjectRouter.post('/',subjectController.addSubject);
-subjectRouter.delete('/:id',subjectController.deleteSubject);
-subjectRouter.put('/:id',subjectController.updateSubject);
+subjectRoutes.get('/',subjectController.getAllSubject);
+subjectRoutes.get('/:id',subjectController.getSubject);
+subjectRoutes.post('/',subjectController.addSubject);
+subjectRoutes.delete('/:id',subjectController.deleteSubject);
+subjectRoutes.put('/:id',subjectController.updateSubject);

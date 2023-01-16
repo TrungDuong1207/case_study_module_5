@@ -4,6 +4,7 @@ import { accountRepo } from '../models/repository/repository';
 export class AuthService {
     static async getUser(req, res) {
         let phone = req.body.phone; 
+        console.log(phone);
         
         let user = await accountRepo.findOneBy({ phone: phone });
         return user;
