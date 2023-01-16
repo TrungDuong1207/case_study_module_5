@@ -40,6 +40,7 @@ export class AuthController {
     static async register(req, res){
         try {
             const user = await AuthService.getUser(req, res);
+            console.log(user)
             if (!user) {
                 await AuthService.addUser(req, res);
                 res.status(201).json({ message: "add user complete" });

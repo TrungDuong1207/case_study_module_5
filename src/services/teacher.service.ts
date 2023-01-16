@@ -13,11 +13,11 @@ export class TeacherService {
         return teacher;
     }
 
-    static async findTeacherByPhone(req, res) {
-        let phone = req.body.phone;
-        let teacher = await teacherRepo.findOneBy({ phone: phone });
-        return teacher;
-    }
+    // static async findTeacherByPhone(req, res) {
+    //     let phone = req.body.phone;
+    //     let teacher = await teacherRepo.findOneBy({ phone: phone });
+    //     return teacher;
+    // }
 
 
     static async addOneTeacher(req, res) {

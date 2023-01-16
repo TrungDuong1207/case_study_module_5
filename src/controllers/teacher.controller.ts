@@ -19,7 +19,7 @@ export class TeacherController {
         try {
             const teachers = await TeacherService.findTeacherById(req, res);
             if (teachers) {
-                res.status(200).json({message: "Sucess"})
+                res.status(200).json({message: "Sucess",teacher: teachers})
             }
         } catch (err) {
             res.status(500).json({message: err.message})
