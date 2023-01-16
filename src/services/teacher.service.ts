@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Like } from "typeorm";
 import { teacherRepo } from "../models/repository/repository";
 const firebase = require('../configs/firebase');
@@ -24,9 +25,10 @@ export class TeacherService {
         if (!req.file) {
             return res.status(400).send("Error: No files found");
         }
-        console.log(req.file);
 
-        const blob = firebase.bucket.file("teachers-upload/" + req.file.originalname + Date.now());
+        let imageNameFireBase = req.file.originalname + Date.now();
+
+        const blob = firebase.bucket.file("teachers-upload/" + req.file.originalname);
 
         const blobWriter = blob.createWriteStream({
             metadata: {
@@ -38,16 +40,18 @@ export class TeacherService {
             console.log(err)
         })
 
-        blobWriter.on('finish', () => {
-            console.log("add teacher finish");
+        blobWriter.on('finish', async () => {
+            let apiImg = await axios.get(`https://firebasestorage.googleapis.com/v0/b/student-manager-md5.appspot.com/o/teachers-upload%2F${imageNameFireBase}`)
+            console.log(apiImg);
+            let imageToken = apiImg.data.downloadTokens;
+            let imageName = `https://firebasestorage.googleapis.com/v0/b/student-manager-md5.appspot.com/o/teachers-upload%2F${imageNameFireBase}?alt=media&token=${imageToken}`;
+            let teacher = await teacherRepo.create({ ...req.body, image: imageName });
+            await teacherRepo.save(teacher);
 
         })
 
         blobWriter.end(req.file.buffer);
 
-        let teacher = await teacherRepo.create({ ...req.body, image: req.file.originalname });
-
-        await teacherRepo.save(teacher);
     }
 
     static async deleteOneTeacher(req, res) {

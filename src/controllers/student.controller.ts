@@ -39,7 +39,7 @@ export class StudentController {
         try {
 
             await studentService.addOneStudent(req, res);
-            res.status(204).json()
+            res.status(200).json({message: "add student complete"})
 
         } catch (err) {
             res.status(500).json({message: err.message})
