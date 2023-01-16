@@ -1,10 +1,14 @@
-import { studentRepo } from "../models/repository/repository";
+
+import {studentRepo} from "../models/repository/repository";
+import {Like} from "typeorm";
+
 const firebase = require('../configs/firebase');
 
 export class studentService {
     static async queryAllStudents(req, res) {
         return await studentRepo.find();
     }
+
 
     static async findStudentById(req, res) {
         let id = req.params.id;
@@ -48,6 +52,7 @@ export class studentService {
         blobWriter.end(req.file.buffer);
 
         let student = await studentRepo.create({ ...req.body, image: req.file.originalname });
+
         console.log(student);
         await studentRepo.save(student);
     }
@@ -62,4 +67,14 @@ export class studentService {
         let student = req.body;
         await studentRepo.update(id, student);
     }
+
+    static async searchStudent(req, res) {
+        const values = req.query.name;
+        const students = await studentRepo.findBy({
+            studentName: Like(`%${values}%`),
+        })
+        return students;
+    }
+
+
 }

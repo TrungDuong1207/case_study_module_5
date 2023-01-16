@@ -5,6 +5,8 @@ import {teacherRoutes} from "./teacher.route";
 import {subjectRoutes} from "./subject.route";
 import { markRoutes } from "./mark.route";
 import { checkAuth } from "../midlewares/auth.middleware";
+import {formTeacherRoutes} from "./formteacher.routers";
+
 
 function route(app) {
     app.use("/auth", authRoutes);
@@ -16,10 +18,12 @@ function route(app) {
     app.use("/students", studentRoutes);
 
     app.use("/teachers", teacherRoutes);
-
     app.use("/subject", subjectRoutes);
 
     app.use("/marks", markRoutes)
+
+    app.use("/formteachers", formTeacherRoutes);
+
 }
 
 export default route;
