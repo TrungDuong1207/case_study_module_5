@@ -10,7 +10,7 @@ teacherRoutes.get("/:id", TeacherController.getTeacher);
 teacherRoutes.post("/", TeacherController.addTeachers);
 teacherRoutes.delete("/:id", TeacherController.deleteTeacher);
 teacherRoutes.put("/:id", TeacherController.updateteacher);
-teacherRoutes.get("/formteacher",)
+// teacherRoutes.get("/formteacher",)
 
 // teacherRoutes.get("/marks/:idStudent", MarkController.getMark);
 // teacherRoutes.post("/marks/:idStudent", MarkController.addMark);
