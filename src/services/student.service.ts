@@ -27,6 +27,7 @@ export class studentService {
     }
 
     static async addOneStudent(req, res) {
+
         if (!req.file) {
             return res.status(400).send("Error: No files found")
         }
@@ -44,7 +45,7 @@ export class studentService {
         blobWriter.on('error', (err) => {
             console.log(err)
         })
-
+///////////////////////
         blobWriter.end(req.file.buffer);
 
         blobWriter.on('finish', async () => {

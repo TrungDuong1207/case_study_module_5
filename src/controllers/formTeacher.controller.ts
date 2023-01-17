@@ -1,5 +1,8 @@
 import {FormTeachersService} from "../services/FormTeachers.service";
-import {teacherRepo} from "../models/repository/repository";
+
+
+
+import {TeacherService} from "../services/teacher.service";
 
 export class FormTeacherController {
    static async getAllFormTeacher (req,res) {
@@ -8,6 +11,18 @@ export class FormTeacherController {
            res.status(200).json(formTeachers);
        } catch (e) {
            console.log(e.message);
+       }
+   }
+   static async updateFormTeacher (req, res) {
+       try {
+           let teacher = await TeacherService.findTeacherById(req,res);
+           if (teacher) {
+               await FormTeachersService.updateFormTeacher(req,res);
+               res.status(200).json({message:'success'});
+           }
+       }
+       catch (e) {
+           console.log(e.message)
        }
    }
 }
