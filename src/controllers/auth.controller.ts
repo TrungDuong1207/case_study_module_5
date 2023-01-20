@@ -4,8 +4,7 @@ import jwt from "jsonwebtoken";
 export class AuthController {
     static async login(req, res) {
         try {
-            const user = await AuthService.getUser(req, res);
-            
+            const user = await AuthService.getUser(req, res);     
             if (user) {
                 const comparePass = await bcrypt.compare(req.body.password, user.password);                
                 if (!comparePass) {
@@ -40,7 +39,6 @@ export class AuthController {
     static async register(req, res){
         try {
             const user = await AuthService.getUser(req, res);
-            console.log(user)
             if (!user) {
                 await AuthService.addUser(req, res);
                 res.status(201).json({ message: "add user complete" });
@@ -49,6 +47,28 @@ export class AuthController {
             }
         } catch (err) {
             res.status(500).json({ message: err.message })
+        }
+    }
+
+    static async getUser(req, res){
+        try {
+        
+            let tokenUser = req.cookies.token;
+            
+            if (tokenUser) {
+                jwt.verify(tokenUser, "123456789", (err, decoded) => {
+                    if (err) {
+                        res.status(401).json({ message: err.message });
+                    } else {
+                        res.status(200).json({user: decoded})
+                    }
+                });
+            } else {
+                res.status(401).json({ message: "token dosen't exist" });
+            }
+    
+        } catch (err) {
+            res.status(500).json({ message: err.message });
         }
     }
 }

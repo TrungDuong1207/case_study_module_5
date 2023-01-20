@@ -10,7 +10,7 @@ export class AuthService {
 
     static async addUser(req, res){
         const passwordHash = await bcrypt.hash(req.body.password, 10);
-        console.log('1')
+        
         let user = await accountRepo.create({...req.body, password: passwordHash});
         await accountRepo.save(user);
     }

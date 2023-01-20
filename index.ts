@@ -4,9 +4,11 @@ import { AppDataSource } from "./src/configs/dataSource";
 import cookieParser from 'cookie-parser';
 import route from "./src/routes/index.route";
 import dotenv from "dotenv";
+import cors  from "cors"
 const PORT = 8000;
 dotenv.config();
 const app = express();
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());

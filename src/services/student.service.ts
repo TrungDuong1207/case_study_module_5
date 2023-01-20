@@ -45,7 +45,7 @@ export class studentService {
         blobWriter.on('error', (err) => {
             console.log(err)
         })
-///////////////////////
+
         blobWriter.end(req.file.buffer);
 
         blobWriter.on('finish', async () => {
