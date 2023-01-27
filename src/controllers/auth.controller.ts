@@ -19,12 +19,12 @@ export class AuthController {
                     expiresIn: 30 * 60 * 1000,
                 });
 
-                let options = {
-                    maxAge: 1000 * 60 * 30, // would expire after 30 minutes
-                    httpOnly: true, // The cookie only accessible by the web server
-                }
+                // let options = {
+                //     maxAge: 1000 * 60 * 30, 
+                //     httpOnly: true, 
+                // }
                 
-                res.cookie('token', token, options);
+                // res.cookie('token', token, options);
 
                 res.status(200).json({token: token});
 
@@ -43,7 +43,7 @@ export class AuthController {
                 await AuthService.addUser(req, res);
                 res.status(201).json({ message: "add user complete" });
             } else {
-                res.status(409).json({message: "user did exist"})
+                res.status(409).json({message: "phone number did exist"})
             }
         } catch (err) {
             res.status(500).json({ message: err.message })
@@ -53,14 +53,14 @@ export class AuthController {
     static async getUser(req, res){
         try {
         
-            let tokenUser = req.cookies.token;
+            let tokenUser = req.query.token;
             
             if (tokenUser) {
                 jwt.verify(tokenUser, "123456789", (err, decoded) => {
                     if (err) {
                         res.status(401).json({ message: err.message });
                     } else {
-                        res.status(200).json({user: decoded})
+                        res.status(200).json(decoded)
                     }
                 });
             } else {

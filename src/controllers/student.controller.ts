@@ -7,7 +7,7 @@ export class StudentController {
 
             if (students) {
 
-                res.status(200).json({message: "Sucess", students: students})
+                res.status(200).json(students)
 
             }
 
@@ -39,8 +39,7 @@ export class StudentController {
         try {
 
             await studentService.addOneStudent(req, res);
-            res.status(200).json({message: "add student complete"})
-
+            
         } catch (err) {
             res.status(500).json({message: err.message})
 
@@ -55,7 +54,7 @@ export class StudentController {
                 res.status(404).json({message: "the student doesn't exist"})
             } else {
                 await studentService.deleteOneStudent(req, res);
-                res.status(204).json({message: "add student complete"});
+                res.status(204).json();
             }
         } catch (err) {
 

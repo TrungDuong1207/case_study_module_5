@@ -6,5 +6,5 @@ export const authRoutes = Router();
 const upload = multer();
 
 authRoutes.post("/login", upload.none(), AuthController.login);
-authRoutes.post("/register", AuthController.register);
+authRoutes.post("/register",upload.none(), AuthController.register);
 authRoutes.get("/users", AuthController.getUser)

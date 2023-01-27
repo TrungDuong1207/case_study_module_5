@@ -7,7 +7,7 @@ export class ClassController {
 
             if (classes) {
 
-                res.status(200).json({message: "Sucess", classes: classes})
+                res.status(200).json(classes)
 
             }
 

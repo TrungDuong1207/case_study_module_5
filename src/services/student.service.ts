@@ -6,7 +6,10 @@ const firebase = require('../configs/firebase');
 
 export class studentService {
     static async queryAllStudents(req, res) {
-        return await studentRepo.find();
+        const students = await studentRepo.createQueryBuilder("student")
+            .innerJoinAndSelect("student.studyClass", "studyClass")
+            .getMany();
+        return students;
     }
 
 
@@ -27,7 +30,6 @@ export class studentService {
     }
 
     static async addOneStudent(req, res) {
-
         if (!req.file) {
             return res.status(400).send("Error: No files found")
         }
@@ -55,9 +57,11 @@ export class studentService {
             let imageToken = apiImg.data.downloadTokens;
 
             let imageName = `https://firebasestorage.googleapis.com/v0/b/student-manager-md5.appspot.com/o/student-upload%2F${imageNameFireBase}?alt=media&token=${imageToken}`;
-            let student = await studentRepo.create({ ...req.body, image: imageName });
-            await studentRepo.save(student);
 
+            let studentCreate = { ...req.body, image: imageName }
+            let student = await studentRepo.create(studentCreate);
+            await studentRepo.save(student);
+            res.status(200).json(studentCreate)
         })
 
 
@@ -66,6 +70,23 @@ export class studentService {
 
     static async deleteOneStudent(req, res) {
         const id = req.params.id;
+        let student = await studentRepo.findOneBy({ id: id });
+        let image = student.image;
+        
+        const baseUrl = "https://firebasestorage.googleapis.com/v0/b/student-manager-md5.appspot.com/o/";
+
+        let imagePath: string = image.replace(baseUrl, "");
+
+        const indexOfEndPath = imagePath.indexOf("?");
+
+        imagePath = imagePath.substring(0, indexOfEndPath);
+
+        imagePath = imagePath.replace("%2F", "/");
+
+        console.log(imagePath);
+        
+        await firebase.bucket.file(imagePath).delete();
+        
         await studentRepo.delete({ id: id });
     }
 

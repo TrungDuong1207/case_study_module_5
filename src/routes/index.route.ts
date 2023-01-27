@@ -11,13 +11,14 @@ import {formTeacherRoutes} from "./formteacher.routers";
 function route(app) {
     app.use("/auth", authRoutes);
 
-    app.use(checkAuth);
+    // app.use(checkAuth);
 
     app.use("/class", classRoutes);
 
     app.use("/students", studentRoutes);
 
     app.use("/teachers", teacherRoutes);
+    
     app.use("/subject", subjectRoutes);
 
     app.use("/marks", markRoutes)
