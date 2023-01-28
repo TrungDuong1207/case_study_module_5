@@ -1,7 +1,7 @@
 import axios from "axios";
-import { studentRepo } from "../models/repository/repository";
+import { studentRepo, classRepo } from "../models/repository/repository";
 import { Like } from "typeorm";
-
+import { v4 as uuidv4 } from 'uuid';
 const firebase = require('../configs/firebase');
 
 export class studentService {
@@ -11,7 +11,6 @@ export class studentService {
             .getMany();
         return students;
     }
-
 
     static async findStudentById(req, res) {
         let id = req.params.id;
@@ -57,11 +56,13 @@ export class studentService {
             let imageToken = apiImg.data.downloadTokens;
 
             let imageName = `https://firebasestorage.googleapis.com/v0/b/student-manager-md5.appspot.com/o/student-upload%2F${imageNameFireBase}?alt=media&token=${imageToken}`;
-
-            let studentCreate = { ...req.body, image: imageName }
+            let idStudent = uuidv4().substring(0,8);
+            let studentCreate = { ...req.body, image: imageName, id: idStudent };
+            let group = await classRepo.findOneBy({id: req.body.studyClass});
+            let newStudent = {...studentCreate, studyClass: group};    
             let student = await studentRepo.create(studentCreate);
             await studentRepo.save(student);
-            res.status(200).json(studentCreate)
+            res.status(200).json(newStudent)
         })
 
 

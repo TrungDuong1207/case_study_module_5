@@ -4,7 +4,7 @@ import {
     ManyToOne,
     OneToMany,
     JoinColumn,
-    PrimaryGeneratedColumn,
+    PrimaryColumn,
 } from "typeorm";
 import { Class } from "./Class";
 import { Marks } from "./Marks";
@@ -12,8 +12,8 @@ export type GenderType = "male" | "female";
 
 @Entity()
 export class Students {
-    @PrimaryGeneratedColumn()
-    readonly id: number;
+    @PrimaryColumn()
+    readonly id: string;
 
     @Column({ type: "varchar", length: 50 })
     studentName: string;
