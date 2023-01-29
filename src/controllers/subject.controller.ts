@@ -9,7 +9,7 @@ export class subjectController {
 
             if (subject) {
 
-                res.status(200).json({ message: "Sucess", subject: subject })
+                res.status(200).json( subject )
 
             }
 

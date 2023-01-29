@@ -1,24 +1,27 @@
-import { markRepo, studentRepo } from "../models/repository/repository";
+import { markRepo, subjectRepo } from "../models/repository/repository";
 
 export class MarkService {
     static async queryMark (req, res){
         const id = req.params.idStudent;        
-        const student = await studentRepo.createQueryBuilder("student")
-                                    .select(["student.studentName"])
-                                    .innerJoinAndSelect("student.studyClass","studyClass")                                  
-                                    .innerJoinAndSelect("student.marks","mark")
+        const mark = await markRepo.createQueryBuilder("mark")                                                                
                                     .innerJoinAndSelect("mark.subject","subject")                                                                    
-                                    .where("student.id = :id",{id: id})
-                                    .getOne();
-        return student;
+                                    .where("mark.student = :id",{id: id})
+                                    .getMany();
+        return mark;
         
     }
 
     static async addOneMark(req, res){
-        const idStudent = req.params.id;
-        const mark= {...req.body, student: +idStudent};
-        const newMark = await markRepo.create(mark);
-        await markRepo.save(newMark);
+        const idStudent = req.params.idStudent;
+        const markCreate= {...req.body, student: idStudent};
+        let subject = await subjectRepo.findOneBy({ id: req.body.subject });
+        
+        const mark = await markRepo.create(markCreate);
+        const markSave = await markRepo.save(mark);
+        const markNew = {...markSave, subject: subject}
+        console.log(markNew);
+        
+        res.status(201).json(markNew);
     }
 
     static async deleteOneMark(req, res){

@@ -19,7 +19,7 @@ function route(app) {
 
     app.use("/teachers", teacherRoutes);
     
-    app.use("/subject", subjectRoutes);
+    app.use("/subjects", subjectRoutes);
 
     app.use("/marks", markRoutes)
 

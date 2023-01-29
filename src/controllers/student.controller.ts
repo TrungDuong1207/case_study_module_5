@@ -22,7 +22,7 @@ export class StudentController {
         try {
             const student = await studentService.getStudent(req, res);
             if (student) {
-                res.status(200).json({message: "Sucess", student: student});
+                res.status(200).json(student);
 
             } else {
                 res.status(404).json({message: "student don't exist "});
@@ -71,7 +71,6 @@ export class StudentController {
                 res.status(404).json({message: "the student doesn't exist"})
             } else {
                 await studentService.editStudent(req, res);
-                res.status(200).json({message: "update class complete"});
             }
         } catch (err) {
 
