@@ -6,8 +6,9 @@ const upload = multer({
     storage: multer.memoryStorage()
 });
 
-teacherRoutes.get("/", TeacherController.getAllteacher);
+teacherRoutes.get("/", TeacherController.getAllTeacher);
 teacherRoutes.get("/:id", TeacherController.getTeacher);
+teacherRoutes.get("/detail/:id", TeacherController.getDetailTeacher);
 teacherRoutes.post("/", upload.single("image"), TeacherController.addTeachers);
 teacherRoutes.delete("/:id", TeacherController.deleteTeacher);
 teacherRoutes.put("/:id", TeacherController.updateteacher);

@@ -1,7 +1,7 @@
 import {
     Column,
     Entity,
-    PrimaryGeneratedColumn,
+    PrimaryColumn,
     OneToMany,
     JoinColumn,
     ManyToOne
@@ -12,8 +12,8 @@ import { Subjects } from "./Subjects";
 export type GenderType = "male" | "female" ;
 @Entity()
 export class Teachers {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryColumn()
+    readonly id: string;
 
     @Column({type:'varchar'})
     name: string;

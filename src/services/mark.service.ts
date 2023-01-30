@@ -30,9 +30,12 @@ export class MarkService {
     }
 
     static async editMark(req, res){
-        const id = req.params.idMark;
+        const id = +req.params.idMark;
         let mark = req.body;
+        let newMark = {...mark, id: id}
         await markRepo.update(id, mark);
+        res.status(200).json(newMark)
+        
     }
     
     

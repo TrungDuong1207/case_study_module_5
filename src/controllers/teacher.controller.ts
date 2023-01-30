@@ -2,11 +2,11 @@ import {TeacherService} from "../services/teacher.service";
 
 export class TeacherController {
 
-    static async getAllteacher(req, res) {
+    static async getAllTeacher(req, res) {
         try {
             const teachers = await TeacherService.queryAllTeacher(req, res);
             if (teachers) {
-                res.status(200).json({message: "Sucess", teacher: teachers})
+                res.status(200).json(teachers)
 
             }
         } catch (err) {
@@ -31,7 +31,6 @@ export class TeacherController {
     static async addTeachers(req, res) {
         try {
              await TeacherService.addOneTeacher(req, res);
-             res.status(200).json({message: "Sucess"})
         } catch (err) {
             res.status(500).json({message: err.message})
         }
@@ -39,8 +38,14 @@ export class TeacherController {
 
     static async deleteTeacher(req, res) {
         try {
-            await TeacherService.deleteOneTeacher(req, res);
-            res.status(200).json({message: "Sucess"})
+            let teacherDelete = await TeacherService.findTeacherById(req, res);
+
+            if (!teacherDelete) {
+                res.status(404).json({message: "the teacher doesn't exist"})
+            } else {
+                await TeacherService.deleteOneTeacher(req, res);
+                res.status(204).json();
+            }
         } catch (err) {
             res.status(500).json({message: err.message})
         }
@@ -54,7 +59,6 @@ export class TeacherController {
                 res.status(404).json({ message: "the teacher doesn't exist" })
             } else {
                 await TeacherService.editTeacher(req, res);
-                res.status(200).json({ message: "update class complete" });
             }
         } catch (err) {
             res.status(500).json({ message: err.message })
@@ -68,6 +72,19 @@ export class TeacherController {
                 res.status(404).json({ message: "the teacher doesn't exist" })
             } else {
                 res.status(200).json({ teachers: teachers});
+            }
+        } catch (err) {
+            res.status(500).json({ message: err.message })
+        }
+    }
+
+    static async getDetailTeacher(req, res) {
+        try {
+            let teacherDetail = await TeacherService.getTeacherDetail(req, res)
+            if (teacherDetail.length == 0) {
+                res.status(404).json({ message: "the teacher doesn't exist" })
+            } else {
+                res.status(200).json(teacherDetail);
             }
         } catch (err) {
             res.status(500).json({ message: err.message })
