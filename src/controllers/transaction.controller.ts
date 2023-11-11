@@ -5,7 +5,8 @@ export class TransactionController {
     static async getTransaction(req: Request, res: Response) {
         try {
             const transactions = await TransactionsService.getTransactionsAndBalances();
-            res.status(200).json(transactions);
+            const tran2 = await TransactionsService.getCustomersWithBlances()
+            res.status(200).json({ transactions, tran2 });
         } catch (e) {
             console.log(e.message);
         }
